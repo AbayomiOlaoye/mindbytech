@@ -108,9 +108,9 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+        "The new MidasBox platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
+      author: "Sarah Agbede",
+      role: "CEO, MidasBox",
     },
     featured: true,
     status: "completed",
@@ -223,9 +223,9 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+        "The Ever's Journal platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
+      author: "Felix John",
+      role: "CTO, Ever's Care",
     },
     featured: true,
     status: "completed",
@@ -337,9 +337,9 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+        "The IFBC platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
+      author: "Harjeet",
+      role: "CEO, IFBC",
     },
     featured: true,
     status: "completed",
@@ -451,9 +451,9 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+        "The  platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
+      author: "Blessed Chukwu",
+      role: "CEO, WhoUEpp",
     },
     featured: true,
     status: "completed",
@@ -572,9 +572,9 @@ export const projects = [
     ],
     testimonial: {
       quote:
-        "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+        "The platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
+      author: "Daniel Uche",
+      role: "Project Manager",
     },
     featured: true,
     status: "completed",
@@ -694,8 +694,8 @@ export const projects = [
     testimonial: {
       quote:
         "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+      author: "Emy Grail",
+      role: "CEO, Mobi.",
     },
     featured: true,
     status: "completed",
@@ -815,8 +815,8 @@ export const projects = [
     testimonial: {
       quote:
         "The new e-commerce platform has completely revolutionized our online presence. The team at MindByte delivered beyond our expectations, creating a scalable solution that has driven incredible growth for our business.",
-      author: "Sarah Johnson",
-      role: "CEO, RetailCorp",
+      author: "",
+      role: "MD, Notch",
     },
     featured: true,
     status: "completed",
