@@ -175,7 +175,7 @@ const ContactPage = () => {
               Get in Touch
             </h1>
             <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
-              Ready to transform your ideas into reality? Let's discuss your project and explore how we can help bring your vision to life.
+              Ready to transform your ideas into reality? Let&apos;s discuss your project and explore how we can help bring your vision to life.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
@@ -208,8 +208,8 @@ const ContactPage = () => {
                   <Mail className="w-8 h-8 text-blue-400" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">Email Us</h3>
-                <p className="text-slate-400 mb-6">Send us a detailed message and we'll respond within 24 hours.</p>
-                <a href="mailto:hello@mindbyte.agency" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300">
+                <p className="text-slate-400 mb-6">Send us a detailed message and we&apos;ll respond within 24 hours.</p>
+                <a href="mailto:hamzatbolaji648@yahoo.com" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300">
                   hello@mindbyte.agency
                 </a>
               </div>
@@ -332,7 +332,7 @@ const ContactPage = () => {
               Start Your Project
             </h2>
             <p className="text-xl text-slate-400 text-center mb-16 max-w-2xl mx-auto">
-              Tell us about your project and we'll get back to you with a customized proposal.
+              Tell us about your project and we&apos;ll get back to you with a customized proposal.
             </p>
 
             <div className="grid lg:grid-cols-2 gap-12">

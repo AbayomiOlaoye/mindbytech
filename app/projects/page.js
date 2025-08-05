@@ -355,7 +355,7 @@ const ProjectsPage = () => {
               Ready to Start Your Project?
             </h2>
             <p className="text-xl text-slate-400 mb-8">
-              Let's discuss how we can help bring your vision to life with
+              Let&apos;s discuss how we can help bring your vision to life with
               innovative technology solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

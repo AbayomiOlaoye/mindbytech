@@ -11,6 +11,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const DevAgencyWebsite = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -481,7 +482,7 @@ const DevAgencyWebsite = () => {
               >
                 {/* Screenshot */}
                 <div className="relative w-full h-48 overflow-hidden">
-                  <img
+                  <Image
                     src={project.image}
                     alt={`${project.title} screenshot`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -535,11 +536,11 @@ const DevAgencyWebsite = () => {
       <section id="contact" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-            Let's Build Something Amazing
+            Let&apos;s Build Something Amazing
           </h2>
           <p className="text-xl text-slate-400 text-center mb-16 max-w-2xl mx-auto">
             Ready to transform your ideas into reality? Fill out the form below
-            and let's discuss your next project.
+            and let&apos;s discuss your next project.
           </p>
 
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
