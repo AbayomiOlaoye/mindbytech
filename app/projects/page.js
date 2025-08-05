@@ -1,157 +1,86 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Search, Filter, ExternalLink, Github, Globe, Users, TrendingUp, Clock, DollarSign, CheckCircle, Code, Database, Server, Zap, Star } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from "react";
+import {
+  ArrowLeft,
+  Search,
+  Filter,
+  ExternalLink,
+  Github,
+  Globe,
+  Users,
+  TrendingUp,
+  Clock,
+  DollarSign,
+  CheckCircle,
+  Code,
+  Database,
+  Server,
+  Zap,
+  Star,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { pageProjects } from "../data";
+import Link from "next/link";
 
 const ProjectsPage = () => {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedTech, setSelectedTech] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedTech, setSelectedTech] = useState("all");
+
+  const projects = pageProjects;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleBackClick = () => {
-    router.push('/');
+    router.push("/");
   };
 
   const handleCaseStudyClick = (projectId) => {
     router.push(`/case-study/${projectId}`);
   };
 
-  const projects = [
-    {
-      id: 'ecommerce-platform',
-      icon: '🛒',
-      title: 'E-Commerce Platform',
-      description: 'A fully-featured e-commerce solution with advanced inventory management, real-time analytics, and mobile-first design.',
-      category: 'web-development',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-      metrics: {
-        users: '500K+',
-        growth: '300%',
-        conversion: '45%',
-        loadTime: '1.2s'
-      },
-      featured: true,
-      status: 'completed'
-    },
-    {
-      id: 'analytics-dashboard',
-      icon: '📊',
-      title: 'Analytics Dashboard',
-      description: 'Real-time business intelligence dashboard with interactive charts, custom reports, and automated insights.',
-      category: 'web-development',
-      technologies: ['Vue.js', 'Python', 'FastAPI', 'MongoDB'],
-      metrics: {
-        users: '50K+',
-        growth: '150%',
-        conversion: '35%',
-        loadTime: '0.8s'
-      },
-      featured: false,
-      status: 'completed'
-    },
-    {
-      id: 'healthcare-system',
-      icon: '🏥',
-      title: 'Healthcare Management System',
-      description: 'Comprehensive patient management system with appointment scheduling, electronic health records, and telemedicine features.',
-      category: 'web-development',
-      technologies: ['Angular', 'Django', 'PostgreSQL', 'Docker'],
-      metrics: {
-        users: '100K+',
-        growth: '200%',
-        conversion: '40%',
-        loadTime: '1.5s'
-      },
-      featured: true,
-      status: 'completed'
-    },
-    {
-      id: 'mobile-app',
-      icon: '📱',
-      title: 'Fitness Tracking App',
-      description: 'Cross-platform mobile application for fitness tracking, workout planning, and social features.',
-      category: 'mobile-development',
-      technologies: ['React Native', 'Firebase', 'Redux', 'Expo'],
-      metrics: {
-        users: '250K+',
-        growth: '180%',
-        conversion: '30%',
-        loadTime: '0.5s'
-      },
-      featured: false,
-      status: 'completed'
-    },
-    {
-      id: 'ai-platform',
-      icon: '🤖',
-      title: 'AI Content Generator',
-      description: 'Intelligent content creation platform powered by machine learning and natural language processing.',
-      category: 'ai-ml',
-      technologies: ['Python', 'TensorFlow', 'React', 'AWS'],
-      metrics: {
-        users: '75K+',
-        growth: '400%',
-        conversion: '50%',
-        loadTime: '2.1s'
-      },
-      featured: true,
-      status: 'completed'
-    },
-    {
-      id: 'cloud-migration',
-      icon: '☁️',
-      title: 'Cloud Migration Project',
-      description: 'Enterprise cloud migration with microservices architecture and automated deployment pipelines.',
-      category: 'cloud-solutions',
-      technologies: ['Kubernetes', 'Docker', 'AWS', 'Terraform'],
-      metrics: {
-        users: '1M+',
-        growth: '250%',
-        conversion: 'N/A',
-        loadTime: '0.9s'
-      },
-      featured: false,
-      status: 'completed'
-    }
-  ];
-
   const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'web-development', name: 'Web Development' },
-    { id: 'mobile-development', name: 'Mobile Development' },
-    { id: 'ai-ml', name: 'AI & Machine Learning' },
-    { id: 'cloud-solutions', name: 'Cloud Solutions' }
+    { id: "all", name: "All Projects" },
+    { id: "web-development", name: "Web Development" },
+    { id: "mobile-development", name: "Mobile Development" },
+    { id: "ai-ml", name: "AI & Machine Learning" },
+    { id: "cloud-solutions", name: "Cloud Solutions" },
   ];
 
-  const allTechnologies = [...new Set(projects.flatMap(p => p.technologies))];
+  const allTechnologies = [...new Set(projects.flatMap((p) => p.technologies))];
 
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    const matchesTech = selectedTech === 'all' || project.technologies.includes(selectedTech);
-    
+  const filteredProjects = projects.filter((project) => {
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" || project.category === selectedCategory;
+    const matchesTech =
+      selectedTech === "all" || project.technologies.includes(selectedTech);
+
     return matchesSearch && matchesCategory && matchesTech;
   });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100">
       {/* Header */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50' : 'bg-slate-900/90'
-      }`}>
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50"
+            : "bg-slate-900/90"
+        }`}
+      >
         <nav className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <button
@@ -162,7 +91,7 @@ const ProjectsPage = () => {
               <span>Back to Home</span>
             </button>
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              DevCraft
+              MindByte
             </div>
           </div>
         </nav>
@@ -176,12 +105,15 @@ const ProjectsPage = () => {
               Our Projects
             </h1>
             <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
-              Discover our portfolio of innovative digital solutions that have transformed businesses and delivered exceptional results.
+              Discover our portfolio of innovative digital solutions that have
+              transformed businesses and delivered exceptional results.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
                 <Users className="w-4 h-4 text-blue-400" />
-                <span className="text-slate-300">{projects.length} Projects</span>
+                <span className="text-slate-300">
+                  {projects.length} Projects
+                </span>
               </div>
               <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
                 <TrendingUp className="w-4 h-4 text-green-400" />
@@ -221,7 +153,7 @@ const ProjectsPage = () => {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
                 >
-                  {categories.map(category => (
+                  {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
@@ -235,7 +167,7 @@ const ProjectsPage = () => {
                   className="bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
                 >
                   <option value="all">All Technologies</option>
-                  {allTechnologies.map(tech => (
+                  {allTechnologies.map((tech) => (
                     <option key={tech} value={tech}>
                       {tech}
                     </option>
@@ -254,13 +186,20 @@ const ProjectsPage = () => {
             {filteredProjects.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-white mb-2">No projects found</h3>
-                <p className="text-slate-400">Try adjusting your search criteria or filters.</p>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  No projects found
+                </h3>
+                <p className="text-slate-400">
+                  Try adjusting your search criteria or filters.
+                </p>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProjects.map((project, index) => (
-                  <div key={project.id} className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300 group">
+                  <div
+                    key={project.id}
+                    className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300 group"
+                  >
                     {/* Project Header */}
                     <div className="relative">
                       <div className="h-48 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-6xl">
@@ -289,7 +228,10 @@ const ProjectsPage = () => {
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologies.slice(0, 3).map((tech, idx) => (
-                          <span key={idx} className="bg-purple-500/10 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/20">
+                          <span
+                            key={idx}
+                            className="bg-purple-500/10 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/20"
+                          >
                             {tech}
                           </span>
                         ))}
@@ -303,11 +245,15 @@ const ProjectsPage = () => {
                       {/* Metrics */}
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="text-center">
-                          <div className="text-lg font-bold text-green-400">{project.metrics.users}</div>
+                          <div className="text-lg font-bold text-green-400">
+                            {project.metrics.users}
+                          </div>
                           <div className="text-xs text-slate-400">Users</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-lg font-bold text-blue-400">{project.metrics.growth}</div>
+                          <div className="text-lg font-bold text-blue-400">
+                            {project.metrics.growth}
+                          </div>
                           <div className="text-xs text-slate-400">Growth</div>
                         </div>
                       </div>
@@ -320,9 +266,16 @@ const ProjectsPage = () => {
                         >
                           View Case Study
                         </button>
-                        <button className="bg-slate-700/50 border border-slate-600 text-slate-300 p-2 rounded-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300">
-                          <ExternalLink className="w-4 h-4" />
-                        </button>
+                        {project.url && (
+                          <Link
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-slate-700/50 border border-slate-600 text-slate-300 p-2 rounded-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300 flex items-center justify-center"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -343,40 +296,49 @@ const ProjectsPage = () => {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  metric: 'Projects Completed',
-                  value: '50+',
-                  description: 'Successful deliveries',
+                  metric: "Projects Completed",
+                  value: "50+",
+                  description: "Successful deliveries",
                   icon: CheckCircle,
-                  color: 'green'
+                  color: "green",
                 },
                 {
-                  metric: 'Total Users',
-                  value: '2M+',
-                  description: 'Across all platforms',
+                  metric: "Total Users",
+                  value: "2M+",
+                  description: "Across all platforms",
                   icon: Users,
-                  color: 'blue'
+                  color: "blue",
                 },
                 {
-                  metric: 'Average Growth',
-                  value: '250%',
-                  description: 'Client revenue increase',
+                  metric: "Average Growth",
+                  value: "250%",
+                  description: "Client revenue increase",
                   icon: TrendingUp,
-                  color: 'purple'
+                  color: "purple",
                 },
                 {
-                  metric: 'Client Satisfaction',
-                  value: '98%',
-                  description: 'Based on feedback',
+                  metric: "Client Satisfaction",
+                  value: "98%",
+                  description: "Based on feedback",
                   icon: Star,
-                  color: 'yellow'
-                }
+                  color: "yellow",
+                },
               ].map((stat, index) => (
-                <div key={index} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center">
-                  <div className={`w-12 h-12 rounded-full bg-${stat.color}-500/20 border border-${stat.color}-500/30 flex items-center justify-center mx-auto mb-4`}>
+                <div
+                  key={index}
+                  className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center"
+                >
+                  <div
+                    className={`w-12 h-12 rounded-full bg-${stat.color}-500/20 border border-${stat.color}-500/30 flex items-center justify-center mx-auto mb-4`}
+                  >
                     <stat.icon className={`w-6 h-6 text-${stat.color}-400`} />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{stat.value}</h3>
-                  <p className="text-lg font-semibold text-slate-300 mb-2">{stat.metric}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {stat.value}
+                  </h3>
+                  <p className="text-lg font-semibold text-slate-300 mb-2">
+                    {stat.metric}
+                  </p>
                   <p className="text-sm text-slate-400">{stat.description}</p>
                 </div>
               ))}
@@ -393,7 +355,8 @@ const ProjectsPage = () => {
               Ready to Start Your Project?
             </h2>
             <p className="text-xl text-slate-400 mb-8">
-              Let's discuss how we can help bring your vision to life with innovative technology solutions.
+              Let's discuss how we can help bring your vision to life with
+              innovative technology solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -417,7 +380,8 @@ const ProjectsPage = () => {
       <footer className="bg-slate-900 border-t border-slate-700/50 py-8">
         <div className="container mx-auto px-6 text-center">
           <p className="text-slate-400">
-            © 2025 DevCraft Agency. All rights reserved. Crafted with passion for digital excellence.
+            © 2025 MindByte Agency. All rights reserved. Crafted with passion
+            for digital excellence.
           </p>
         </div>
       </footer>
@@ -425,4 +389,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage; 
+export default ProjectsPage;

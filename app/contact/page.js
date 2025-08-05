@@ -84,7 +84,7 @@ const ContactPage = () => {
     {
       name: 'Sarah Johnson',
       role: 'CEO & Founder',
-      email: 'sarah@devcraft.agency',
+      email: 'sarah@mindbyte.agency',
       phone: '+1 (555) 123-4567',
       avatar: 'SJ',
       specialties: ['Strategy', 'Business Development', 'Client Relations']
@@ -92,7 +92,7 @@ const ContactPage = () => {
     {
       name: 'Michael Chen',
       role: 'CTO & Lead Developer',
-      email: 'michael@devcraft.agency',
+      email: 'michael@mindbyte.agency',
       phone: '+1 (555) 123-4568',
       avatar: 'MC',
       specialties: ['Technical Architecture', 'System Design', 'Team Leadership']
@@ -100,7 +100,7 @@ const ContactPage = () => {
     {
       name: 'Emily Rodriguez',
       role: 'UX/UI Design Lead',
-      email: 'emily@devcraft.agency',
+      email: 'emily@mindbyte.agency',
       phone: '+1 (555) 123-4569',
       avatar: 'ER',
       specialties: ['User Experience', 'Visual Design', 'Design Systems']
@@ -108,7 +108,7 @@ const ContactPage = () => {
     {
       name: 'David Kim',
       role: 'Project Manager',
-      email: 'david@devcraft.agency',
+      email: 'david@mindbyte.agency',
       phone: '+1 (555) 123-4570',
       avatar: 'DK',
       specialties: ['Project Management', 'Agile Methodologies', 'Client Communication']
@@ -122,7 +122,7 @@ const ContactPage = () => {
       address: '123 Innovation Drive, Suite 100',
       zip: 'San Francisco, CA 94105',
       phone: '+1 (555) 123-4567',
-      email: 'sf@devcraft.agency',
+      email: 'sf@mindbyte.agency',
       hours: 'Mon-Fri: 9AM-6PM PST'
     },
     {
@@ -131,7 +131,7 @@ const ContactPage = () => {
       address: '456 Tech Avenue, Floor 15',
       zip: 'New York, NY 10001',
       phone: '+1 (555) 123-4568',
-      email: 'nyc@devcraft.agency',
+      email: 'nyc@mindbyte.agency',
       hours: 'Mon-Fri: 9AM-6PM EST'
     },
     {
@@ -140,7 +140,7 @@ const ContactPage = () => {
       address: '789 Digital Street, Office 3',
       zip: 'London, UK EC1A 1BB',
       phone: '+44 20 1234 5678',
-      email: 'london@devcraft.agency',
+      email: 'london@mindbyte.agency',
       hours: 'Mon-Fri: 9AM-6PM GMT'
     }
   ];
@@ -161,7 +161,7 @@ const ContactPage = () => {
               <span>Back to Home</span>
             </button>
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              DevCraft
+              mindbyte
             </div>
           </div>
         </nav>
@@ -209,8 +209,8 @@ const ContactPage = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">Email Us</h3>
                 <p className="text-slate-400 mb-6">Send us a detailed message and we'll respond within 24 hours.</p>
-                <a href="mailto:hello@devcraft.agency" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300">
-                  hello@devcraft.agency
+                <a href="mailto:hello@mindbyte.agency" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300">
+                  hello@mindbyte.agency
                 </a>
               </div>
               <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 text-center">
@@ -520,7 +520,7 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <p className="text-slate-300 font-semibold">Email</p>
-                        <p className="text-slate-400">hello@devcraft.agency</p>
+                        <p className="text-slate-400">hamzatbolaji648@yahoo.com</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -529,7 +529,7 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <p className="text-slate-300 font-semibold">Phone</p>
-                        <p className="text-slate-400">+1 (555) 123-4567</p>
+                        <p className="text-slate-400">+234 (80) 637-948-95</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -538,14 +538,14 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <p className="text-slate-300 font-semibold">Headquarters</p>
-                        <p className="text-slate-400">San Francisco, CA</p>
+                        <p className="text-slate-400">Nigeria, Lagos.</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8">
-                  <h4 className="text-xl font-bold mb-4 text-white">Why Choose DevCraft?</h4>
+                  <h4 className="text-xl font-bold mb-4 text-white">Why Choose MindByte?</h4>
                   <ul className="space-y-3 text-slate-300">
                     <li className="flex items-center">
                       <span className="text-green-400 mr-2">✓</span>
@@ -601,7 +601,7 @@ const ContactPage = () => {
       <footer className="bg-slate-900 border-t border-slate-700/50 py-8">
         <div className="container mx-auto px-6 text-center">
           <p className="text-slate-400">
-            © 2025 DevCraft Agency. All rights reserved. Crafted with passion for digital excellence.
+            © 2025 MindByte Agency. All rights reserved. Crafted with passion for digital excellence.
           </p>
         </div>
       </footer>
