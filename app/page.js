@@ -485,6 +485,8 @@ const DevAgencyWebsite = () => {
                   <Image
                     src={project.image}
                     alt={`${project.title} screenshot`}
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -727,7 +729,9 @@ const DevAgencyWebsite = () => {
                     </div>
                     <div>
                       <p className="text-slate-300 font-semibold">Email</p>
-                      <p className="text-slate-400">hamzatbolaji648@yahoo.com</p>
+                      <p className="text-slate-400">
+                        hamzatbolaji648@yahoo.com
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
