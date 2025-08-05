@@ -1,103 +1,576 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+
+const DevAgencyWebsite = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    service: '',
+    budget: '',
+    message: '',
+    timeline: ''
+  });
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus({ type: '', message: '' });
+
+    // Simulate form submission
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      console.log('Form submitted:', formData);
+      
+      setFormStatus({
+        type: 'success',
+        message: 'Thank you! We\'ll get back to you within 24 hours.'
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        service: '',
+        budget: '',
+        message: '',
+        timeline: ''
+      });
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or contact us directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100">
+      {/* Header */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50' : 'bg-slate-900/90'
+      }`}>
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              DevCraft
+            </div>
+            <div className="hidden md:flex space-x-8">
+              {['home', 'services', 'tech'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item)}
+                  className="text-slate-300 hover:text-blue-400 transition-colors duration-300 capitalize"
+                >
+                  {item}
+                </button>
+              ))}
+              <Link
+                href="/projects"
+                className="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+              >
+                Projects
+              </Link>
+              <button
+                onClick={() => window.location.href = '/contact'}
+                className="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Hero Section */}
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 animate-pulse"></div>
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Crafting Digital Excellence
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
+            We build scalable, innovative software solutions that transform your business ideas into powerful digital experiences.
+          </p>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Start Your Project
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Our Services
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: '🌐',
+                title: 'Web Development',
+                description: 'Custom web applications built with modern frameworks and best practices.',
+                features: ['Responsive Design', 'Progressive Web Apps', 'E-commerce Solutions', 'API Development', 'Performance Optimization']
+              },
+              {
+                icon: '📱',
+                title: 'Mobile Development',
+                description: 'Native and cross-platform mobile applications for iOS and Android.',
+                features: ['React Native Apps', 'Flutter Development', 'Native iOS/Android', 'App Store Deployment', 'Maintenance & Support']
+              },
+              {
+                icon: '☁️',
+                title: 'Cloud Solutions',
+                description: 'Scalable cloud infrastructure and deployment solutions.',
+                features: ['AWS/Azure/GCP', 'DevOps & CI/CD', 'Microservices', 'Container Orchestration', 'Cloud Migration']
+              },
+              {
+                icon: '🤖',
+                title: 'AI & Machine Learning',
+                description: 'Intelligent solutions powered by artificial intelligence and ML.',
+                features: ['Custom AI Models', 'Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Predictive Analytics']
+              }
+            ].map((service, index) => (
+              <div key={index} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-800/70 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300">
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
+                <p className="text-slate-400 mb-4">{service.description}</p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="text-slate-300 text-sm flex items-center">
+                      <span className="text-green-400 mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consulting Services */}
+      <section className="py-20 bg-slate-800/30">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Consulting Services
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                icon: '🎯',
+                title: 'Technical Strategy',
+                description: 'Strategic technology planning and architecture design for your business growth.',
+                features: ['Technology Roadmapping', 'Architecture Review', 'Stack Selection', 'Scalability Planning']
+              },
+              {
+                icon: '⚡',
+                title: 'Performance Optimization',
+                description: 'Optimize your existing applications for better performance and user experience.',
+                features: ['Code Auditing', 'Database Optimization', 'Load Testing', 'Security Assessment']
+              }
+            ].map((service, index) => (
+              <div key={index} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:bg-slate-800/70 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300">
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-2xl font-bold mb-3 text-white">{service.title}</h3>
+                <p className="text-slate-400 mb-6">{service.description}</p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="text-slate-300 flex items-center">
+                      <span className="text-green-400 mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section id="tech" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Our Tech Stack
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                category: 'Frontend',
+                technologies: ['React', 'Vue.js', 'Angular', 'Next.js', 'TypeScript', 'Tailwind CSS']
+              },
+              {
+                category: 'Backend',
+                technologies: ['Node.js', 'Python', 'Django', 'FastAPI', 'Ruby', 'Go', 'Ruby on Rails']
+              },
+              {
+                category: 'Database',
+                technologies: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Elasticsearch']
+              },
+              {
+                category: 'Cloud & DevOps',
+                technologies: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions']
+              }
+            ].map((stack, index) => (
+              <div key={index} className="bg-slate-800/30 rounded-xl p-6 border border-slate-700/30">
+                <h3 className="text-xl font-bold mb-4 text-blue-400">{stack.category}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {stack.technologies.map((tech, idx) => (
+                    <span key={idx} className="bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/20 hover:bg-blue-500/20 transition-colors duration-300 cursor-pointer">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="py-20 bg-slate-800/30">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-between items-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+              Featured Projects
+            </h2>
+            <button
+              onClick={() => window.location.href = '/projects'}
+              className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300 flex items-center space-x-2"
+            >
+              <span>View all projects</span>
+              <span>→</span>
+            </button>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: '🛒',
+                title: 'E-Commerce Platform',
+                description: 'A fully-featured e-commerce solution with advanced inventory management, real-time analytics, and mobile-first design.',
+                technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS']
+              },
+              {
+                icon: '📊',
+                title: 'Analytics Dashboard',
+                description: 'Real-time business intelligence dashboard with interactive charts, custom reports, and automated insights.',
+                technologies: ['Vue.js', 'Python', 'FastAPI', 'MongoDB']
+              },
+              {
+                icon: '🏥',
+                title: 'Healthcare Management System',
+                description: 'Comprehensive patient management system with appointment scheduling, electronic health records, and telemedicine features.',
+                technologies: ['Angular', 'Django', 'PostgreSQL', 'Docker']
+              }
+            ].map((project, index) => (
+              <div key={index} className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300">
+                <div className="h-48 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-6xl">
+                  {project.icon}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
+                  <p className="text-slate-400 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, idx) => (
+                      <span key={idx} className="bg-purple-500/10 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/20">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <button 
+                    onClick={() => window.location.href = '/case-study'}
+                    className="text-blue-400 hover:text-blue-300 font-semibold transition-colors duration-300"
+                  >
+                    View Case Study →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <section id="contact" className="py-20">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            Let's Build Something Amazing
+          </h2>
+          <p className="text-xl text-slate-400 text-center mb-16 max-w-2xl mx-auto">
+            Ready to transform your ideas into reality? Fill out the form below and let's discuss your next project.
+          </p>
+
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6 text-white">Get Started Today</h3>
+              
+              {formStatus.message && (
+                <div className={`mb-6 p-4 rounded-lg flex items-center ${
+                  formStatus.type === 'success' 
+                    ? 'bg-green-500/10 border border-green-500/20 text-green-400' 
+                    : 'bg-red-500/10 border border-red-500/20 text-red-400'
+                }`}>
+                  {formStatus.type === 'success' ? (
+                    <CheckCircle className="w-5 h-5 mr-2" />
+                  ) : (
+                    <AlertCircle className="w-5 h-5 mr-2" />
+                  )}
+                  {formStatus.message}
+                </div>
+              )}
+
+              <div className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-slate-300 mb-2">Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-300 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                      placeholder="your.email@company.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-slate-300 mb-2">Company</label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                      placeholder="Your company name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-slate-300 mb-2">Phone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-slate-300 mb-2">Service Needed *</label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                    >
+                      <option value="">Select a service</option>
+                      <option value="web-development">Web Development</option>
+                      <option value="mobile-development">Mobile Development</option>
+                      <option value="cloud-solutions">Cloud Solutions</option>
+                      <option value="ai-ml">AI & Machine Learning</option>
+                      <option value="consulting">Consulting</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-slate-300 mb-2">Budget Range</label>
+                    <select
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="10k-25k">$10k - $25k</option>
+                      <option value="25k-50k">$25k - $50k</option>
+                      <option value="50k-100k">$50k - $100k</option>
+                      <option value="100k+">$100k+</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 mb-2">Timeline</label>
+                  <select
+                    name="timeline"
+                    value={formData.timeline}
+                    onChange={handleInputChange}
+                    className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="asap">ASAP</option>
+                    <option value="1-3-months">1-3 months</option>
+                    <option value="3-6-months">3-6 months</option>
+                    <option value="6-months+">6+ months</option>
+                    <option value="just-exploring">Just exploring</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 mb-2">Project Details *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={4}
+                    className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300 resize-none"
+                    placeholder="Tell us about your project, goals, and requirements..."
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold mb-6 text-white">Get in Touch</h3>
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
+                      <Mail className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 font-semibold">Email</p>
+                      <p className="text-slate-400">hello@devcraft.agency</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
+                      <Phone className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 font-semibold">Phone</p>
+                      <p className="text-slate-400">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
+                      <MapPin className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 font-semibold">Location</p>
+                      <p className="text-slate-400">San Francisco, CA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8">
+                <h4 className="text-xl font-bold mb-4 text-white">Why Choose DevCraft?</h4>
+                <ul className="space-y-3 text-slate-300">
+                  <li className="flex items-center">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Expert team with 50+ successful projects
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Agile development methodology
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-green-400 mr-2">✓</span>
+                    24/7 support and maintenance
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-green-400 mr-2">✓</span>
+                    Free consultation and project estimate
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 border-t border-slate-700/50 py-8">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-slate-400">
+            © 2025 DevCraft Agency. All rights reserved. Crafted with passion for digital excellence.
+          </p>
+        </div>
       </footer>
     </div>
   );
-}
+};
+
+export default DevAgencyWebsite;
