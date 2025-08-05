@@ -726,7 +726,7 @@ const DevAgencyWebsite = () => {
                     </div>
                     <div>
                       <p className="text-slate-300 font-semibold">Email</p>
-                      <p className="text-slate-400">mindbyte@gmail.com</p>
+                      <p className="text-slate-400">hamzatbolaji648@yahoo.com</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
