@@ -141,7 +141,7 @@ const DevAgencyWebsite = () => {
     //     "TensorFlow",
     //   ],
     //   image: "/screenshots/locum.png",
-    //   liveLink: "https://www.whouepp.com",
+    //   liveLink: "https://locumspace.co/",
     // },
 
     // {

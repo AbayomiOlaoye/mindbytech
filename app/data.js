@@ -919,7 +919,7 @@ export const pageProjects = [
     },
     featured: true,
     status: "completed",
-    url: 'https://www.whouepp.com'
+    url: 'https://locumspace.co/'
   },
   {
     id: "mobi-bank",
