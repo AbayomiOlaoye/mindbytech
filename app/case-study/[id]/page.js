@@ -5,6 +5,8 @@ import { ArrowLeft, ExternalLink, Github, Globe, Users, TrendingUp, Clock, Dolla
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { projects } from '@/app/data';
+import Layout from '@/app/components/Layout';
+import { motion } from 'framer-motion';
 
 // Project data (could also be fetched from an API or CMS)
 
@@ -51,54 +53,67 @@ export default function CaseStudyPage({ params }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100">
-      {/* Header */}
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50' : 'bg-slate-900/90'
-      }`}>
-        <nav className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <button
-              onClick={handleBackClick}
-              className="flex items-center space-x-2 text-slate-300 hover:text-blue-400 transition-colors duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Projects</span>
-            </button>
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              MindByte
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Layout>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20">
+      <section className="pt-20 pb-20">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
+          <motion.div 
+            className="max-w-4xl mx-auto md:text-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.div 
+              className="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <span className="text-blue-400 text-sm font-medium">Case Study</span>
-            </div>
-            <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            </motion.div>
+            <motion.h1 
+              className="text-3xl md:text-6xl leading-tight font-black mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               {project.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
+            </motion.h1>
+            <motion.p 
+              className="text-md md:text-xl text-justify md:text-center md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
               {project.description}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
-                <Users className="w-4 h-4 text-blue-400" />
-                <span className="text-slate-300">{project.metrics.users} Users</span>
-              </div>
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
-                <TrendingUp className="w-4 h-4 text-green-400" />
-                <span className="text-slate-300">{project.metrics.growth} Growth</span>
-              </div>
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
-                <Clock className="w-4 h-4 text-purple-400" />
-                <span className="text-slate-300">{project.metrics.loadTime} Load Time</span>
-              </div>
-            </div>
-          </div>
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4 mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              {[
+                { icon: Users, text: `${project.metrics.users} Users`, color: "blue" },
+                { icon: TrendingUp, text: `${project.metrics.growth} Growth`, color: "green" },
+                { icon: Clock, text: `${project.metrics.loadTime} Load Time`, color: "purple" }
+              ].map((metric, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <metric.icon className={`w-4 h-4 text-${metric.color}-400`} />
+                  <span className="text-slate-300">{metric.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -106,48 +121,107 @@ export default function CaseStudyPage({ params }) {
       <section className="py-20 bg-slate-800/30">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.div 
+              className="grid lg:grid-cols-2 gap-12 items-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <motion.h2 
+                  className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
                   Project Overview
-                </h2>
-                <p className="text-lg text-slate-400 mb-6">
+                </motion.h2>
+                <motion.p 
+                  className="text-lg text-slate-400 mb-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
                   {project.overview}
-                </p>
-                <div className="space-y-4">
+                </motion.p>
+                <motion.div 
+                  className="space-y-4"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                >
                   {project.solutions.slice(0, 3).map((solution, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                    <motion.div 
+                      key={index} 
+                      className="flex items-start space-x-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.6 + index * 0.1, ease: "easeOut" }}
+                    >
                       <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
                       <div>
                         <h4 className="font-semibold text-white mb-1">{solution.split(' ')[0]}</h4>
                         <p className="text-slate-400 text-sm">{solution}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-6 text-white">Key Metrics</h3>
-                <div className="space-y-6">
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">Conversion Rate</span>
-                    <span className="text-green-400 font-bold">{project.metrics.conversion}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">Page Load Speed</span>
-                    <span className="text-blue-400 font-bold">{project.metrics.loadTime}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">User Growth</span>
-                    <span className="text-purple-400 font-bold">{project.metrics.growth}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">Active Users</span>
-                    <span className="text-green-400 font-bold">{project.metrics.users}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+              <motion.div 
+                className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <motion.h3 
+                  className="text-xl font-bold mb-6 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  Key Metrics
+                </motion.h3>
+                <motion.div 
+                  className="space-y-6"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
+                  {[
+                    { label: "Conversion Rate", value: project.metrics.conversion, color: "green" },
+                    { label: "Page Load Speed", value: project.metrics.loadTime, color: "blue" },
+                    { label: "User Growth", value: project.metrics.growth, color: "purple" },
+                    { label: "Active Users", value: project.metrics.users, color: "green" }
+                  ].map((metric, index) => (
+                    <motion.div 
+                      key={index}
+                      className="flex justify-between items-center"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1, ease: "easeOut" }}
+                    >
+                      <span className="text-slate-400">{metric.label}</span>
+                      <span className={`text-${metric.color}-400 font-bold`}>{metric.value}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -156,33 +230,101 @@ export default function CaseStudyPage({ params }) {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Challenges & Solutions
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-4 text-red-400">Challenges</h3>
-                <ul className="space-y-3 text-slate-300">
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-2 gap-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <motion.h3 
+                  className="text-xl font-bold mb-4 text-red-400"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  Challenges
+                </motion.h3>
+                <motion.ul 
+                  className="space-y-3 text-slate-300"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
                   {project.challenges.map((challenge, index) => (
-                    <li key={index} className="flex items-start space-x-2">
+                    <motion.li 
+                      key={index} 
+                      className="flex items-start space-x-2"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1, ease: "easeOut" }}
+                    >
                       <span className="text-red-400 mt-1">•</span>
                       <span>{challenge}</span>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
-              </div>
-              <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-4 text-green-400">Solutions</h3>
-                <ul className="space-y-3 text-slate-300">
+                </motion.ul>
+              </motion.div>
+              <motion.div 
+                className="bg-green-500/10 border border-green-500/20 rounded-2xl p-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
+                <motion.h3 
+                  className="text-xl font-bold mb-4 text-green-400"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  Solutions
+                </motion.h3>
+                <motion.ul 
+                  className="space-y-3 text-slate-300"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                >
                   {project.solutions.map((solution, index) => (
-                    <li key={index} className="flex items-start space-x-2">
+                    <motion.li 
+                      key={index} 
+                      className="flex items-start space-x-2"
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.4 + index * 0.1, ease: "easeOut" }}
+                    >
                       <span className="text-green-400 mt-1">•</span>
                       <span>{solution}</span>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
-              </div>
-            </div>
+                </motion.ul>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -191,53 +333,70 @@ export default function CaseStudyPage({ params }) {
       <section className="py-20 bg-slate-800/30">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Technology Stack
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
-                <div className="flex items-center space-x-3 mb-4">
-                  <Code className="w-6 h-6 text-blue-400" />
-                  <h3 className="text-xl font-bold text-white">Frontend</h3>
-                </div>
-                <div className="space-y-2">
-                  {project.techStack.frontend.map((tech, index) => (
-                    <div key={index} className="flex justify-between">
-                      <span className="text-slate-400">{tech.name}</span>
-                      <span className="text-blue-400">{tech.version}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
-                <div className="flex items-center space-x-3 mb-4">
-                  <Server className="w-6 h-6 text-green-400" />
-                  <h3 className="text-xl font-bold text-white">Backend</h3>
-                </div>
-                <div className="space-y-2">
-                  {project.techStack.backend.map((tech, index) => (
-                    <div key={index} className="flex justify-between">
-                      <span className="text-slate-400">{tech.name}</span>
-                      <span className="text-green-400">{tech.version}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
-                <div className="flex items-center space-x-3 mb-4">
-                  <Database className="w-6 h-6 text-purple-400" />
-                  <h3 className="text-xl font-bold text-white">Infrastructure</h3>
-                </div>
-                <div className="space-y-2">
-                  {project.techStack.infrastructure.map((tech, index) => (
-                    <div key={index} className="flex justify-between">
-                      <span className="text-slate-400">{tech.name}</span>
-                      <span className="text-purple-400">{tech.version}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              {[
+                { title: "Frontend", icon: Code, color: "blue", techs: project.techStack.frontend },
+                { title: "Backend", icon: Server, color: "green", techs: project.techStack.backend },
+                { title: "Infrastructure", icon: Database, color: "purple", techs: project.techStack.infrastructure }
+              ].map((stack, stackIndex) => (
+                <motion.div 
+                  key={stackIndex}
+                  className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: stackIndex * 0.2, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                >
+                  <motion.div 
+                    className="flex items-center space-x-3 mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: stackIndex * 0.2 + 0.2, ease: "easeOut" }}
+                  >
+                    <stack.icon className={`w-6 h-6 text-${stack.color}-400`} />
+                    <h3 className="text-xl font-bold text-white">{stack.title}</h3>
+                  </motion.div>
+                  <motion.div 
+                    className="space-y-2"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: stackIndex * 0.2 + 0.4, ease: "easeOut" }}
+                  >
+                    {stack.techs.map((tech, index) => (
+                      <motion.div 
+                        key={index} 
+                        className="flex justify-between"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: stackIndex * 0.2 + 0.6 + index * 0.1, ease: "easeOut" }}
+                      >
+                        <span className="text-slate-400">{tech.name}</span>
+                        <span className={`text-${stack.color}-400`}>{tech.version}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -246,21 +405,71 @@ export default function CaseStudyPage({ params }) {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Development Process
-            </h2>
-            <div className="grid md:grid-cols-4 gap-6">
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-4 gap-6"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               {project.process.map((step, index) => (
-                <div key={index} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center">
-                  <div className={`w-12 h-12 rounded-full bg-${step.color}-500/20 border border-${step.color}-500/30 flex items-center justify-center mx-auto mb-4`}>
+                <motion.div 
+                  key={index} 
+                  className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                >
+                  <motion.div 
+                    className={`w-12 h-12 rounded-full bg-${step.color}-500/20 border border-${step.color}-500/30 flex items-center justify-center mx-auto mb-4`}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.2, ease: "easeOut" }}
+                  >
                     <span className="text-2xl font-bold text-white">{index + 1}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.phase}</h3>
-                  <p className="text-sm text-slate-400 mb-2">{step.duration}</p>
-                  <p className="text-sm text-slate-300">{step.description}</p>
-                </div>
+                  </motion.div>
+                  <motion.h3 
+                    className="text-lg font-bold text-white mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.4, ease: "easeOut" }}
+                  >
+                    {step.phase}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-sm text-slate-400 mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.6, ease: "easeOut" }}
+                  >
+                    {step.duration}
+                  </motion.p>
+                  <motion.p 
+                    className="text-sm text-slate-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.8, ease: "easeOut" }}
+                  >
+                    {step.description}
+                  </motion.p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -269,21 +478,71 @@ export default function CaseStudyPage({ params }) {
       <section className="py-20 bg-slate-800/30">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Results & Impact
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               {project.results.map((result, index) => (
-                <div key={index} className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center">
-                  <div className={`w-12 h-12 rounded-full bg-${result.color}-500/20 border border-${result.color}-500/30 flex items-center justify-center mx-auto mb-4`}>
+                <motion.div 
+                  key={index} 
+                  className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                >
+                  <motion.div 
+                    className={`w-12 h-12 rounded-full bg-${result.color}-500/20 border border-${result.color}-500/30 flex items-center justify-center mx-auto mb-4`}
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.2, ease: "easeOut" }}
+                  >
                     <result.icon className={`w-6 h-6 text-${result.color}-400`} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{result.value}</h3>
-                  <p className="text-lg font-semibold text-slate-300 mb-2">{result.metric}</p>
-                  <p className="text-sm text-slate-400">{result.description}</p>
-                </div>
+                  </motion.div>
+                  <motion.h3 
+                    className="text-2xl font-bold text-white mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.4, ease: "easeOut" }}
+                  >
+                    {result.value}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-lg font-semibold text-slate-300 mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.6, ease: "easeOut" }}
+                  >
+                    {result.metric}
+                  </motion.p>
+                  <motion.p 
+                    className="text-sm text-slate-400"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 + 0.8, ease: "easeOut" }}
+                  >
+                    {result.description}
+                  </motion.p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -292,27 +551,76 @@ export default function CaseStudyPage({ params }) {
       {project.testimonial && (
         <section className="py-20">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8 md:p-12">
+            <motion.div 
+              className="max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-8 md:p-12"
+                whileHover={{ scale: 1.02, y: -5 }}
+              >
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  <motion.h3 
+                    className="text-2xl md:text-3xl font-bold text-white mb-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  >
                     &quot;{project.testimonial.quote.split(' ').slice(0, 5).join(' ')}...&quot;
-                  </h3>
-                  <p className="text-lg text-slate-300 mb-6">
+                  </motion.h3>
+                  <motion.p 
+                    className="text-lg text-slate-300 mb-6"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  >
                     &quot;{project.testimonial.quote}&quot;
-                  </p>
-                  <div className="flex items-center justify-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                  </motion.p>
+                  <motion.div 
+                    className="flex items-center justify-center space-x-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  >
+                    <motion.div 
+                      className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                    >
                       <span className="text-white font-bold text-lg">{project.testimonial.author.charAt(0)}</span>
-                    </div>
+                    </motion.div>
                     <div className="text-left">
-                      <p className="font-semibold text-white">{project.testimonial.author}</p>
-                      <p className="text-slate-400">{project.testimonial.role}</p>
+                      <motion.p 
+                        className="font-semibold text-white"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                      >
+                        {project.testimonial.author}
+                      </motion.p>
+                      <motion.p 
+                        className="text-slate-400"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+                      >
+                        {project.testimonial.role}
+                      </motion.p>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       )}
@@ -320,39 +628,66 @@ export default function CaseStudyPage({ params }) {
       {/* CTA Section */}
       <section className="py-20 bg-slate-800/30">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Ready to Build Your Next Project?
-            </h2>
-            <p className="text-xl text-slate-400 mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-slate-400 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               Let&apos;s discuss how we can help transform your business with innovative technology solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300"
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Start Your Project
-              </Link>
-              <Link
-                href="/projects"
-                className="border border-slate-600 text-slate-300 px-8 py-4 rounded-full font-semibold text-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300"
+                <Link
+                  href="/contact"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300"
+                >
+                  Start Your Project
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                View More Projects
-              </Link>
-            </div>
-          </div>
+                <Link
+                  href="/projects"
+                  className="border border-slate-600 text-slate-300 px-8 py-4 rounded-full font-semibold text-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300"
+                >
+                  View More Projects
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-700/50 py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-slate-400">
-            © 2025 MindByte Agency. All rights reserved. Crafted with passion for digital excellence.
-          </p>
-        </div>
-      </footer>
+      </Layout>
     </div>
   );
 }
