@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  ArrowLeft,
   Search,
   Filter,
   ExternalLink,
@@ -22,24 +21,16 @@ import {
 import { useRouter } from "next/navigation";
 import { pageProjects } from "../data";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import Layout from "../components/Layout";
 
 const ProjectsPage = () => {
   const router = useRouter();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedTech, setSelectedTech] = useState("all");
 
   const projects = pageProjects;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleBackClick = () => {
     router.push("/");
@@ -72,69 +63,92 @@ const ProjectsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100">
-      {/* Header */}
-      <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-slate-900/95 backdrop-blur-lg border-b border-slate-700/50"
-            : "bg-slate-900/90"
-        }`}
-      >
-        <nav className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <button
-              onClick={handleBackClick}
-              className="flex items-center space-x-2 text-slate-300 hover:text-blue-400 transition-colors duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Home</span>
-            </button>
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              MindByte
-            </div>
-          </div>
-        </nav>
-      </header>
+    <Layout>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20">
+      <section className="pt-20 pb-10">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* <motion.h1 
+              className="text-5xl md:text-6xl min-h-[90px] font-black mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               Our Projects
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto">
+            </motion.h1> */}
+            <motion.p 
+              className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
               Discover our portfolio of innovative digital solutions that have
               transformed businesses and delivered exceptional results.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4 mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Users className="w-4 h-4 text-blue-400" />
                 <span className="text-slate-300">
                   {projects.length} Projects
                 </span>
-              </div>
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
+              </motion.div>
+              <motion.div 
+                className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <TrendingUp className="w-4 h-4 text-green-400" />
                 <span className="text-slate-300">100% Success Rate</span>
-              </div>
-              <div className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2">
+              </motion.div>
+              <motion.div 
+                className="flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Clock className="w-4 h-4 text-purple-400" />
                 <span className="text-slate-300">2M+ Users Served</span>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-8 bg-slate-800/30">
+      <motion.section className="py-8 bg-slate-800/30"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-              {/* Search */}
-              <div className="relative flex-1 max-w-md">
+            <motion.div 
+              className="flex flex-col lg:flex-row gap-6 items-center justify-between"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="relative flex-1 max-w-md"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
                 <input
                   type="text"
@@ -143,10 +157,15 @@ const ProjectsPage = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full bg-slate-700/50 border border-slate-600 rounded-lg pl-10 pr-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-colors duration-300"
                 />
-              </div>
+              </motion.div>
 
-              {/* Category Filter */}
-              <div className="flex items-center space-x-4">
+              <motion.div 
+                className="flex items-center space-x-4"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
                 <Filter className="w-5 h-5 text-slate-400" />
                 <select
                   value={selectedCategory}
@@ -160,7 +179,6 @@ const ProjectsPage = () => {
                   ))}
                 </select>
 
-                {/* Technology Filter */}
                 <select
                   value={selectedTech}
                   onChange={(e) => setSelectedTech(e.target.value)}
@@ -173,34 +191,67 @@ const ProjectsPage = () => {
                     </option>
                   ))}
                 </select>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Projects Grid */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             {filteredProjects.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-white mb-2">
+              <motion.div 
+                className="text-center py-20"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <motion.div 
+                  className="text-6xl mb-4"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  🔍
+                </motion.div>
+                <motion.h3 
+                  className="text-2xl font-bold text-white mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                >
                   No projects found
-                </h3>
-                <p className="text-slate-400">
+                </motion.h3>
+                <motion.p 
+                  className="text-slate-400"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                >
                   Try adjusting your search criteria or filters.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <motion.div 
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
                 {filteredProjects.map((project, index) => (
-                  <div
+                  <motion.div
                     key={project.id}
                     className="bg-slate-800/50 rounded-2xl overflow-hidden border border-slate-700/50 hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-300 group"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                    whileHover={{ scale: 1.02, y: -5 }}
                   >
-                    {/* Project Header */}
                     <div className="relative">
                       <div className="h-48 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-6xl">
                         {project.icon}
@@ -216,7 +267,6 @@ const ProjectsPage = () => {
                       </div>
                     </div>
 
-                    {/* Project Content */}
                     <div className="p-6">
                       <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors duration-300">
                         {project.title}
@@ -225,7 +275,6 @@ const ProjectsPage = () => {
                         {project.description}
                       </p>
 
-                      {/* Technologies */}
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologies.slice(0, 3).map((tech, idx) => (
                           <span
@@ -242,7 +291,6 @@ const ProjectsPage = () => {
                         )}
                       </div>
 
-                      {/* Metrics */}
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="text-center">
                           <div className="text-lg font-bold text-green-400">
@@ -258,11 +306,10 @@ const ProjectsPage = () => {
                         </div>
                       </div>
 
-                      {/* Action Buttons */}
                       <div className="flex space-x-3">
                         <button
                           onClick={() => handleCaseStudyClick(project.id)}
-                          className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                          className="flex-1 text-sm md:text-base bg-gradient-to-r from-blue-500 cursor-pointer to-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
                         >
                           View Case Study
                         </button>
@@ -271,29 +318,40 @@ const ProjectsPage = () => {
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-slate-700/50 border border-slate-600 text-slate-300 p-2 rounded-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300 flex items-center justify-center"
+                            className="bg-slate-700/50 border border-slate-600 text-sm md:text-base text-slate-300 p-2 rounded-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300 flex items-center justify-center"
                           >
                             <ExternalLink className="w-4 h-4" />
                           </Link>
                         )}
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-20 bg-slate-800/30">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+            <motion.h2 
+              className="text-3xl md:text-4xl leading-tight font-bold text-center mb-16 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Our Impact in Numbers
-            </h2>
-            <div className="grid md:grid-cols-4 gap-8">
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-4 gap-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               {[
                 {
                   metric: "Projects Completed",
@@ -324,9 +382,14 @@ const ProjectsPage = () => {
                   color: "yellow",
                 },
               ].map((stat, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 text-center"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, y: -3 }}
                 >
                   <div
                     className={`w-12 h-12 rounded-full bg-${stat.color}-500/20 border border-${stat.color}-500/30 flex items-center justify-center mx-auto mb-4`}
@@ -340,52 +403,70 @@ const ProjectsPage = () => {
                     {stat.metric}
                   </p>
                   <p className="text-sm text-slate-400">{stat.description}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold leading-tight mb-6 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               Ready to Start Your Project?
-            </h2>
-            <p className="text-xl text-slate-400 mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-slate-400 mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            >
               Let&apos;s discuss how we can help bring your vision to life with
               innovative technology solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
+              <motion.button
                 onClick={handleBackClick}
                 className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Start Your Project
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={handleBackClick}
                 className="border border-slate-600 text-slate-300 px-8 py-4 rounded-full font-semibold text-lg hover:border-blue-500 hover:text-blue-400 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Schedule a Call
-              </button>
-            </div>
-          </div>
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-700/50 py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-slate-400">
-            © 2025 MindByte Agency. All rights reserved. Crafted with passion
-            for digital excellence.
-          </p>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 };
 
