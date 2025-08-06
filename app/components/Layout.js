@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <Link href="/">
               <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -170,11 +170,9 @@ const Layout = ({ children }) => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-slate-400">
-            © 2025 MindByte Agency. All rights reserved
-          </p>
-        </div>
+        <small className="text-slate-400 flex justify-center items-center text-center">
+          © 2025 MindByte Agency. All rights reserved
+        </small>
       </motion.footer>
     </div>
   );

@@ -559,7 +559,7 @@ const DevAgencyWebsite = () => {
       </section>
 
       {/* Contact Form */}
-      <section id="contact" className="py-20 w-full px-2">
+      <section id="contact" className="py-20 w-full px-4">
         <div className="container mx-auto">
           <motion.h2 
             className="text-2xl md:text-5xl mx-auto font-bold text-center mb-8 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
