@@ -559,10 +559,10 @@ const DevAgencyWebsite = () => {
       </section>
 
       {/* Contact Form */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-6">
+      <section id="contact" className="py-20 w-full px-2">
+        <div className="container mx-auto">
           <motion.h2 
-            className="text-2xl md:text-5xl font-bold text-center mb-8 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+            className="text-2xl md:text-5xl mx-auto font-bold text-center mb-8 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -571,7 +571,7 @@ const DevAgencyWebsite = () => {
             Let&apos;s Build Something Amazing
           </motion.h2>
           <motion.p 
-            className="text-xl text-slate-400 text-center mb-16 max-w-2xl mx-auto"
+            className="text-md md:text-xl text-slate-400 text-center mb-16 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -741,7 +741,7 @@ const DevAgencyWebsite = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-blue-500 text-sm md:text-base to-purple-600 text-white py-4 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -791,7 +791,7 @@ const DevAgencyWebsite = () => {
                     </div>
                     <div>
                       <p className="text-slate-300 font-semibold">Location</p>
-                      <p className="text-slate-400">Berlin, Germany</p>
+                      <p className="text-slate-400">Lagos, Nigeria</p>
                     </div>
                   </div>
                 </div>
